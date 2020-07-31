@@ -1,40 +1,46 @@
 #include "heapSort.h"
 
-void swap(int *n1, int *n2)
+int* buildHeap(int* arreglo, int size)
 {
-	int temp = *n1;
-	*n1 = *n2;
-	*n2 = temp;
+	for(int i = size / 2; i >= 0; i--){
+         siftdown(arreglo, arreglo[i], i, size);
+     }
 }
-
-int* buildHeap(int* arreglo, int size, int i)
-{
-	int maximo = i;
-	int hijoIzquierda = 2 * i + 1;
-	int hijoDerecha = 2 * i +2;
-
-	if(hijoIzquierda < size && arreglo[hijoIzquierda] > arreglo[maximo])
-	{
-		maximo = hijoIzquierda;
-	}
-	if(hijoDerecha < size && arreglo[hijoDerecha] > arreglo[maximo])
-	{
-		maximo = hijoDerecha;
-	}
-	return arreglo;
-}
-
 
 int* heapSort(int* arreglo, int size)
 {
-	for (int i = size / 2 - 1; i >= 0; i--)
+	buildHeap(arreglo,size);
+	for(int ultimo = size - 1; ultimo > 0; ultimo--)
 	{
-		buildHeap(arreglo, size, i);
-	}
-	for (int i = size - 1; i>= 0; i--)
-	{
-		swap(&arreglo[0], &arreglo[i]);
-		buildHeap(arreglo,i,0);
-	}
-	return arreglo;
+         int ultimoNodo = arreglo[ultimo];
+         arreglo[ultimo] = arreglo[0];
+         arreglo[0] = ultimoNodo;
+         siftdown(arreglo, ultimoNodo, 0, ultimo -1);
+     }
+}
+
+void siftdown(int arreglo[], int valor, int raiz, int ultimo){
+     int hijoIzquierdo = 2 * raiz + 1 ;
+     while(hijoIzquierdo <= ultimo)
+     	{ 
+         if(hijoIzquierdo < ultimo)
+        	{
+            	if(arreglo[hijoIzquierdo + 1] > arreglo[hijoIzquierdo])
+            	{
+                	hijoIzquierdo++;
+            	}
+
+        	}
+         if(valor >= arreglo[hijoIzquierdo])
+         {
+            break;
+         }
+         else
+         {
+            arreglo[raiz] = arreglo[hijoIzquierdo];
+            raiz = hijoIzquierdo;
+            hijoIzquierdo = 2 * raiz + 1;
+         }
+         arreglo[raiz] = valor;
+     	}	
 }
