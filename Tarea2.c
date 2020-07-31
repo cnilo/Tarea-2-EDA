@@ -1,3 +1,4 @@
+#include "heapSort.h"
 #include "insertionSort.h"
 
 int* crearArreglo(const char nombredearchivo[200], int* size)
@@ -36,9 +37,8 @@ int main(int argc, char const *argv[])
 	int* arreglo = crearArreglo(argv[1], &size);
     int n = sizeof(arreglo) / sizeof(arreglo[0]);
     printArray(arreglo,size);
-    insertionSort(arreglo,size);
+    heapSort(arreglo,size);
     printf("\n Arreglo ordenado: \n");
     printArray(arreglo,size);
-    
 	return 0;
 }
