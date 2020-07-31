@@ -8,7 +8,7 @@ int* buildHeap(int* arreglo, int size);
 
 int* heapSort(int* arreglo, int size);
 
-void siftdown(int* arreglo, int valor, int raiz, int ultimo);
+void siftDown(int* arreglo, int valor, int raiz, int ultimo);
 	
 
 #endif

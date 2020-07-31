@@ -3,7 +3,7 @@
 int* buildHeap(int* arreglo, int size)
 {
 	for(int i = size / 2; i >= 0; i--){
-         siftdown(arreglo, arreglo[i], i, size);
+         siftDown(arreglo, arreglo[i], i, size);
      }
 }
 
@@ -15,11 +15,11 @@ int* heapSort(int* arreglo, int size)
          int ultimoNodo = arreglo[ultimo];
          arreglo[ultimo] = arreglo[0];
          arreglo[0] = ultimoNodo;
-         siftdown(arreglo, ultimoNodo, 0, ultimo -1);
+         siftDown(arreglo, ultimoNodo, 0, ultimo -1);
      }
 }
 
-void siftdown(int arreglo[], int valor, int raiz, int ultimo){
+void siftDown(int arreglo[], int valor, int raiz, int ultimo){
      int hijoIzquierdo = 2 * raiz + 1 ;
      while(hijoIzquierdo <= ultimo)
      	{ 
