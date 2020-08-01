@@ -3,4 +3,3 @@ Código de resolución de la tarea 2 del curso ELO-320: Estructura de datos y al
 
 Los archivos .txt poseen números aleatorios que deben ser ingresados a un arreglo el cual debe ordenarse mediante heap sort o insertion sort.
 
-# ME GUSTA LA CORNETA
