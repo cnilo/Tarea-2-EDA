@@ -1,4 +1,5 @@
 #include "insertionSort.h"
+
 int* insertionSort(int* arreglo, int size) 
 { 
     int i, llave, j; 
@@ -14,3 +15,5 @@ int* insertionSort(int* arreglo, int size)
     } 
     return arreglo;
 } 
+/* Insertion Sort se realizó mediante el seudocódigo que nos entregó el profe. se itera I para los elementos del arreglo y J
+que toma como valor la posición anterior del arreglo para hacer la comparación. */

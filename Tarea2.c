@@ -2,43 +2,42 @@
 #include "insertionSort.h"
 #include <string.h>
 
-int* crearArreglo(const char nombredearchivo[200], int* size)
-{
-    int *arreglo=malloc(sizeof(int));
-    FILE *pfile;
-    pfile = fopen(nombredearchivo ,"r");  
-    char linea[48];
-    int contador = 0;
+int* crearArreglo(const char nombredearchivo[200], int* size) // Se crea esta función para crear un arreglo dinámico de enteros recorriendo el archivo
+{       
+    int *arreglo=malloc(sizeof(int)); // Se pide memoria dinámica.
+    FILE *pfile; //Se crea un puntero al archivo
+    pfile = fopen(nombredearchivo ,"r");  // Se abre el archivo en modo lectura
+    char linea[48]; // Esta variable guardará lo que el programa encuentre en cada línea
+    int contador = 0; //Se añade un contador para recorrer el arreglo
     while(!feof(pfile)){
-        arreglo=realloc(arreglo, sizeof(int)*(contador+1));
-        char *actual=fgets(linea,8,pfile);
-        arreglo[contador]=atoi(actual);
+        arreglo=realloc(arreglo, sizeof(int)*(contador+1)); //Por cada linea pedimos memoria consistente con la cantidad de lineas recorrodas
+        char *actual=fgets(linea,8,pfile); //Extraemos el contenido de la línea
+        arreglo[contador]=atoi(actual); // Se guarda en el arreglo casteándose a entero.
         contador++;
     }
     fclose(pfile);
     arreglo=realloc(arreglo, sizeof(int)*(contador+1));
     arreglo[contador]=-1;
-    *size = contador;
-    return arreglo;
-
-	                  
+    *size = contador; //pasamos por referenicia a size el largo del arreglo para poder utilizarlo en otras funciones.
+    return arreglo;              
 }
 
-void printArray(int* arreglo, int size) 
+
+void printArray(int* arreglo, int size) // Función sencilla que imprimirá uno por uno los elementos de nuestro arreglo.
 { 
     int i; 
-    for (i = 0; i < size; i++) 
+    for (i = 0; i < size; i++) //Iteramos sobre el arreglo y por cada iteración imprimimos el elemento i.
         printf("%d ", arreglo[i]); 
     printf("\n");
 }
 
-int main(int argc, char const *argv[])
-{
-    int size = 0;
-	int* arreglo = crearArreglo(argv[1], &size);
-    int n = sizeof(arreglo) / sizeof(arreglo[0]);
 
-    if(!strcmp(argv[2], "insertionSort")) 
+int main(int argc, char const *argv[]) // Implementamos la función main con argc y argv que nos servirán para recibir como parámetros tanto la función como el nombre del arhivo
+{
+    int size = 0; // Inicializamos tamaño, que pasaremos por referencia a crearArreglo para poder recibir el tamaño del arreglo.
+	int* arreglo = crearArreglo(argv[1], &size); // En arreglo guardaremos un arreglo, creado por crear arreglo con el nombre de archivo dado en consola
+
+    if(!strcmp(argv[2], "insertionSort")) // Comparamos el string dado en argv[2] y en caso de ser insertionSort, imprimimos el arreglo desordenado, realizamos insertion sort e imprimimos el arreglo ordenado
     {
         printArray(arreglo,size);
         insertionSort(arreglo,size);
@@ -47,7 +46,7 @@ int main(int argc, char const *argv[])
 
     }
 
-    if(!strcmp(argv[2], "heapSort")) 
+    if(!strcmp(argv[2], "heapSort")) // Mismo caso para heap sort
     {
         printArray(arreglo,size);
         heapSort(arreglo,size);
@@ -59,6 +58,7 @@ int main(int argc, char const *argv[])
     {
         printf("Compruebe que el nombre del algoritmo ha sido ingresado correctamente.\n");
     }
-    
+
+
 	return 0;
 }
